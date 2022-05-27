@@ -20,9 +20,32 @@
         <form class="form-inline">
             <input id="ads-input" class="form-control mr-sm-2" type="search" placeholder="Enter your Location" aria-label="Search">
         </form>
+        <div id="location"></div>
     </div>
 
    <script>
+    var div  = document.getElementById("location");
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+          div.innerHTML = "The Browser Does not Support Geolocation";
+        }
+      }
+
+      function showPosition(position) {
+        div.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
+      }
+
+      function showError(error) {
+        if(error.PERMISSION_DENIED){
+            div.innerHTML = "The User have denied the request for Geolocation.";
+        }
+      }
+      getLocation()
+
+      
+
        function initAutocomplete() {
           var input = document.getElementById('ads-input');
           var searchBox = new google.maps.places.SearchBox(input);

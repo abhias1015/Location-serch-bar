@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Multi Selecter</title>
+   
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+   
+</head>
+<body>
+<div class="container">
+    <select class="select-item" id="dynamicAttributes" name="dynamicAttributes[]" multiple="true" data-tags="true">
+        <option selected value="HTML and CSS">HTML and CSS</option>
+        <option value="Python">Python</option>
+        <option value="Java">Java</option>
+        <option value="JavaScript">JavaScript
+        </option>
+        <option value="Swift">Swift</option>
+        <option value="C++">C++</option>
+        <option value="C#">C#</option>
+        <option value="R">R</option>
+        <option value="Golang (Go)">Golang (Go)
+        </option>
+        <option value="PHP">PHP</option>
+        <option value="TypeScript">TypeScript</option>
+        <option value="Scala">Scala</option>
+        <option value="13">Shell</option>
+        <option value="Shell">PowerShell</option>
+        <option value="Perl">Perl</option>
+        <option value="Haskell">Haskell</option>
+        <option value="Kotlin">Kotlin
+        </option>
+        <option value="Visual Basic .NET">Visual Basic .NET</option>
+        <option value="SQL">SQL</option>
+        <option value="Delphi">Delphi</option>
+        <option value="MATLAB">MATLAB</option>
+        <option value="Groovy">Groovy</option>
+        <option value="Lua">Lua</option>
+        <option value="Rust">Rust</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+      </select>
+      <button onclick="SetName()" id="submitButton" class="btn" type="submit">submit</button>
+   
+    <input class="input" type="text" id="txtName" readonly="readonly" />
+    </div>   
+
+     
+      
+</body>
+ 
+<script>
+    function hideSelected(value) {
+  if (value && !value.selected) {
+    return $('<span>' + value.text + '</span>');
+  }
+}
+
+$(document).ready(function() {
+  $('#dynamicAttributes').select2({
+    allowClear: true,
+    placeholder: {
+      id: "",
+      placeholder: "Leave blank to ..."
+    },
+    minimumResultsForSearch: -1,
+    width: 600,
+    templateResult: hideSelected,
+  });
+});
+
+
+
+
+function SetName() {
+      var txtName = document.getElementById("txtName");
+      txtName.value = Array.prototype.filter.call( document.getElementById("dynamicAttributes").options, el => el.selected).map(el => el.value).join(",");
+    }
+ 
+
+ 
+</script>
+ 
+</html>
